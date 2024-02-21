@@ -43,7 +43,7 @@ class MainApp():
         tamano = int(input(">>"))
         if tamano > 0:
             for i in range(tamano):
-                print(f"ingrese dato ({i}):")
+                print(f"ingrese dato ({i+1}):")
                 self._datos.append(int(input(">>")))
             print("Datos capturados!!!")
         else:
@@ -89,7 +89,7 @@ class MainApp():
         
         #calculo de mediana
         if muestra%2 == 0:
-            self._mediana = (self._datos[(muestra/2)-1]+self._datos[(muestra/2)])/2
+            self._mediana = (self._datos[(muestra//2)-1]+self._datos[(muestra//2)])/2
         else:
             self._mediana = self._datos[(muestra//2)]
         
