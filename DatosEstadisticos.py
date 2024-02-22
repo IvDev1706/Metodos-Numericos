@@ -140,8 +140,19 @@ class MainApp():
         PD = numero - PE
         
         #multiplicar
-        numero2 = PD*(10**cifras)
+        numeroT = 0
+        contador = 1
+        contadorCeros = 0
+        while True:
+            numeroT = PD*(10**contador)
+            PET = int(numeroT)
+            if PET != 0:
+                break
+            else:
+                contador +=1
+                contadorCeros +=1
         
+        numero2 = PD*(10**(contadorCeros+cifras))
         #se vuelve a separar
         PE2 = int(numero2)
         PD2 = numero2 - PE2
@@ -151,7 +162,7 @@ class MainApp():
             PE2 += 1
         
         #division de parte
-        resultado = PE + (PE2/(10**cifras))
+        resultado = PE + (PE2/(10**(cifras+contadorCeros)))
         
         #retornamos
         return resultado
@@ -167,6 +178,7 @@ class MainApp():
             self._varianza = self.reduccion(self._varianza, self._cfs)
             self._desviacion = self.reduccion(self._desviacion, self._cfs)
             
+        print(self.reduccion(0.000437,2))
         
         #impresion de datos
         print("Medidas de tendencia central")
