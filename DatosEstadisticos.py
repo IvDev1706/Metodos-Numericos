@@ -177,7 +177,8 @@ class MainApp():
             self._media = self.reduccion(self._media, self._cfs)
             self._varianza = self.reduccion(self._varianza, self._cfs)
             self._desviacion = self.reduccion(self._desviacion, self._cfs)
-            
+        
+        print("Prueba de ceros")   
         print(self.reduccion(0.000437,2))
         
         #impresion de datos
