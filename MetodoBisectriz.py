@@ -1,4 +1,3 @@
-
 class Bisectriz():
     #******* Metodo constructor *******#
     def __init__(self) -> None:
@@ -8,9 +7,10 @@ class Bisectriz():
         self._raiz = 0.0
         self._grado = 0
         self._existe = True
+        self._iteraciones = 0
         self.menuPrincipal()
         a, b = self._intervalo
-        self.bisectriz(a, b)
+        self.bisectriz(a, b, 0)
         self.ImprimirResultados()
     #******* Metodos de instancia *******#
     def menuPrincipal(self)->None:
@@ -38,8 +38,8 @@ class Bisectriz():
         
         #captura de intervalo estimado
         print("Ingrese el intervalo estimado: ")
-        a = int(input("(a) >> "))
-        b = int(input("(b) >> "))
+        a = float(input("(a) >> "))
+        b = float(input("(b) >> "))
         self._intervalo = (a,b)
         print("Intervalo capturado!!")
         print("**********************")
@@ -51,7 +51,7 @@ class Bisectriz():
         print("**********************")
         
      #metodo para encontrar una raiz mediante el metodo de la bisectriz   
-    def bisectriz(self, a, b)->None:
+    def bisectriz(self, a, b, ant)->None:
         #condicion de paro
         if a < b:
             #calcular punto medio
@@ -67,13 +67,16 @@ class Bisectriz():
             else:
                 #obtener producto de funciones
                 producto = fMedia*fInferior
+                error = abs((puntoMedio-ant))/puntoMedio
                 #tres casos posibles
-                if producto == 0:
+                if error <= self._error:
                     self._raiz = puntoMedio
                 elif producto < 0:
-                    self.bisectriz(a,puntoMedio)
+                    self._iteraciones+=1
+                    self.bisectriz(a,puntoMedio,puntoMedio)
                 elif producto > 0:
-                    self.bisectriz(puntoMedio,b)
+                    self._iteraciones+=1
+                    self.bisectriz(puntoMedio,b,puntoMedio)
         else:
             self._existe = False
                 
@@ -92,7 +95,8 @@ class Bisectriz():
         print("polinomio dado: ")
         for coeficiente in self._coeficientes:
             if self._grado > 0:
-                print(f"{coeficiente}x^{self._grado}", end=" + ")
+                if coeficiente!=0:
+                    print(f"{coeficiente}x^{self._grado}", end=" + ")
                 self._grado -= 1
             else:
                 print(f"{coeficiente}")
@@ -101,6 +105,7 @@ class Bisectriz():
         print(f"¿existe raiz?: {self._existe}")
         if self._existe:
             print(f"Raiz encontrada en X = ({self._raiz})")
+            print(f"numero de tieraciones: {self._iteraciones+1}")
         else:
             print("intente con otro intervalo")
         print("*************************")
