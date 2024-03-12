@@ -62,7 +62,7 @@ class FP():
             Xr = b - ((fSuperior*(a-b))/(fInferior-fSuperior))
             
             #calcular el error
-            error = (Xr-ant)/Xr
+            error = abs(Xr-ant)/Xr
             
             #casos posibles de error
             if error <= self._error:
@@ -98,7 +98,7 @@ class FP():
         print(f"¿existe raiz?: {self._existe}")
         if self._existe:
             print(f"Raiz encontrada en X = ({self._raiz})")
-            print(f"numero de tieraciones: {self._iteraciones+1}")
+            print(f"numero de iteraciones: {self._iteraciones+1}")
         else:
             print("intente con otro intervalo")
         print("*************************")
